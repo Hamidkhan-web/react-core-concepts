@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import logo from './logo.svg';
 import './App.css';
 
@@ -21,6 +21,7 @@ function App() {
       <header className="App-header">
         <p> i am a react person</p>
         <Counter></Counter>
+        <Users></Users>
         {
           nayoks.map(nayok => <li>{nayok}</li>)
         }
@@ -55,6 +56,25 @@ function Counter(){
       <h1>Count: {count}</h1>
       <button onClick={()=> setCount(count - 1)}>Decrease</button>
       <button onClick={()=> setCount(count + 1)}>Increase</button>
+    </div>
+  )
+}
+
+function Users(){
+  const [users, setUsers] = useState([]);
+  useEffect(()=>{
+    fetch('https://jsonplaceholder.typicode.com/users')
+    .then(res => res.json())
+    .then(data => setUsers(data));
+  }, [])
+  return(
+    <div>
+      <h3>Dynamic Users: {users.length}</h3>
+      <ul>
+        {
+          users.map(user => <li>{user.email}</li>)
+        }
+      </ul>
     </div>
   )
 }
