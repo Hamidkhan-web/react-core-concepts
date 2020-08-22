@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import logo from './logo.svg';
 import './App.css';
 
@@ -7,7 +7,8 @@ function App() {
   const products = [
     {name:'Photoshop', price:'$90.99'},
     {name:'Illustrator', price:'$60.99'},
-    {name:'PDF Reader', price:'$6.99'}
+    {name:'PDF Reader', price:'$6.99'},
+    {name:'Premier El', price:'$249.99'}
   ]
   // const nayokName = nayoks.map(nayok => nayok);
   // console.log(nayokName);
@@ -19,6 +20,7 @@ function App() {
     <div className="App">
       <header className="App-header">
         <p> i am a react person</p>
+        <Counter></Counter>
         {
           nayoks.map(nayok => <li>{nayok}</li>)
         }
@@ -41,6 +43,23 @@ function App() {
     </div>
   );
 }
+
+function Counter(){
+  const [count, setCount] = useState(10);
+  const handleIncrease = ()=> setCount(count + 1);
+    //const newCount = count + 1;
+    
+  
+  return(
+    <div>
+      <h1>Count: {count}</h1>
+      <button onClick={()=> setCount(count - 1)}>Decrease</button>
+      <button onClick={()=> setCount(count + 1)}>Increase</button>
+    </div>
+  )
+}
+
+
 function Product(props) {
   const productStyle={
     border:'1px solid gray',
